@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="static/export.js"></script>
 </head>
 
 <body ng-app="practichemApp">
@@ -47,13 +48,22 @@
                                 <div class="col s12 m12">
                                     <h4 class="header">User Added Details</h4>
                                     <div class="card-panel teal" ng-show="IsHidden" style="height:360px;overflow:auto;">
+                                        <textarea id="inputTextToSave" cols="80" rows="25" style="display:none">
+                                                {{formattedString}}
+                                            </textarea>
                                         <ul class="collection" ng-repeat="user in userArray track by $index">
                                             <li class="collection-item">{{ user | uppercase}}</li>
                                         </ul>
                                     </div>
                                     <div class="card-action" ng-show="IsHidden">
-                                        <button class="btn waves-effect waves-light" type="download" name="action" ng-click="getData();">download
-                                        <i class="material-icons right">cloud_download</i>
+                                        <div class="input-field col s12">
+                                            <i class="material-icons prefix">file_download</i>
+                                            <input type="text" class="validate" id="inputFileNameToSaveAs" placeholder="Enter preferred name with type of file eg- .doc .txt">
+                                            <label for="icon_prefix">Type ur preferred name with format</label>
+                                        </div>
+                                        <!-- <input id="inputFileNameToSaveAs" placeholder="Enter preferred name with type of file eg- .doc .txt"></input> -->
+                                        <button class="btn waves-effect waves-light" type="download" onclick="saveTextAsFile()">Download
+                                        <i class=" material-icons right ">cloud_download</i>
                                         </button>
                                     </div>
                                 </div>
@@ -67,34 +77,41 @@
 
     <script>
         // Code goes here
-
         var app = angular.module('practichemApp', []);
 
         app.controller('MainCtrl', function($scope) {
             $scope.userArray = [];
+
             //$scope.formData = {};
             $scope.IsHidden = false;
             //console.log($scope.userArray);
             $scope.submitForm = function(isValid) {
 
                 if (isValid) {
-                    $scope.userArray.push($scope.formData.username, $scope.formData.address);
+                    $scope.userArray.push('Name' + ":" + $scope.formData.username, 'Address' + ":" + $scope.formData.address);
                 }
                 $scope.IsHidden = $scope.IsHidden ? true : true;
-                console.log($scope.userArray);
+                // console.log($scope.userArray);
                 $scope.formData.username = '';
                 $scope.formData.address = '';
+                $scope.formattedString = $scope.userArray.toString()
+                    // .replace(",", '</br>') //remove the commas
+                    .replace("[", "") //remove the right bracket
+                    .replace("]", "")
+                    //remove the left bracket
+                    .trim();
+                // console.log($scope.userArray);
             };
-            $scope.getData = function() {
-                alert($scope.userArray)
-            }
+            // $scope.getData = function() {
+            //     alert($scope.userArray)
+            // }
 
         });
     </script>
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript " src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js "></script>
 
 </body>
 

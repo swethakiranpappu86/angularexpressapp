@@ -4,9 +4,10 @@ var express = require('express'),
     flash = require('connect-flash'),
     session = require('express-session'),
     auth = require('./auth.js'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    path = require('path');
 
-app.use('/', express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'static')));
 
 app.use(session({
     secret: 'some-secret',
@@ -35,6 +36,10 @@ app.use(flash());
 //     res.send('<p><a href="index.html">Login</a></p>');
 //     // }
 // });
+
+app.get('/static/export.js', function(req, res) {
+    res.sendFile(path.join(__dirname + '/static/export.js'));
+});
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + "/" + "index.html");
@@ -78,7 +83,7 @@ app.post('/dashboard', function(req, res) {
 //     })
 // );
 
-var server = app.listen(3000, function() {
+var server = app.listen(8000, function() {
     var port = server.address().port;
 
     console.log('Server running on http://127.0.0.1:%s', port);
