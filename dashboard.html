@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body ng-app="practichemApp">
+    <div class="container" ng-controller="MainCtrl">
+        <div class="row">
+            <!-- <div class="col s2"></div> -->
+            <div class="col s12 md6 ">
+                <div class="col s12 z-depth-4 card-panel">
+                    <form class="col s12" name="practichemForm" ng-submit="submitForm(practichemForm.$valid)" novalidate="">
+                        <div class="col s12 m6">
+                            <h4 class="header">User Registration Details</h4>
+                            <div class="card horizontal">
+                                <div class="card-stacked">
+                                    <div class="card-content">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">perm_identity</i>
+                                                <input id="icon_prefix" type="text" class="validate" ng-model="formData.username" ng-minlength="3" ng-maxlength="20" required="">
+                                                <label for="icon_prefix">Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <i class="material-icons prefix">add_location</i>
+                                                <textarea id="icon_prefix" class="materialize-textarea" ng-model="formData.address"></textarea>
+                                                <label for="icon_prefix2">Add Location</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-action">
+                                        <button class="btn waves-effect waves-light" type="submit" name="action" ng-disabled="practichemForm.$invalid">Submit
+                                        <i class="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m6">
+                            <div class="row">
+                                <div class="col s12 m12">
+                                    <h4 class="header">User Added Details</h4>
+                                    <div class="card-panel teal" ng-show="IsHidden" style="height:360px;overflow:auto;">
+                                        <ul class="collection" ng-repeat="user in userArray track by $index">
+                                            <li class="collection-item">{{ user | uppercase}}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-action" ng-show="IsHidden">
+                                        <button class="btn waves-effect waves-light" type="download" name="action" ng-click="getData();">download
+                                        <i class="material-icons right">cloud_download</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Code goes here
+
+        var app = angular.module('practichemApp', []);
+
+        app.controller('MainCtrl', function($scope) {
+            $scope.userArray = [];
+            //$scope.formData = {};
+            $scope.IsHidden = false;
+            //console.log($scope.userArray);
+            $scope.submitForm = function(isValid) {
+
+                if (isValid) {
+                    $scope.userArray.push($scope.formData.username, $scope.formData.address);
+                }
+                $scope.IsHidden = $scope.IsHidden ? true : true;
+                console.log($scope.userArray);
+                $scope.formData.username = '';
+                $scope.formData.address = '';
+            };
+            $scope.getData = function() {
+                alert($scope.userArray)
+            }
+
+        });
+    </script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+</body>
+
+</html>

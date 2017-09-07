@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s3"></div>
+            <div class="col s6">
+                <div class="col s12 z-depth-4 card-panel">
+                    <form class="login-form" action="/dashboard" method="POST">
+                        <div class="row">
+                            <div class="input-field col s12 center">
+                                <img src="http://w3lessons.info/logo.png" alt="" class="responsive-img valign profile-image-login">
+                                <p class="center login-form-text">W3lessons - Material Design Login Form</p>
+                            </div>
+                        </div>
+                        <div class="row margin">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">person_outline</i>
+                                <input id="icon-prefix1" class="validate" name="email" type="email">
+                                <label for="email" data-error="wrong" data-success="right" class="center-align">Email</label>
+                            </div>
+                        </div>
+                        <div class="row margin">
+                            <div class="input-field col s12">
+                                <i class="material-icons prefix">linear_scale</i>
+                                <input name="password" type="password">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m12 l12  login-text">
+                                <input type="checkbox" id="remember-me" />
+                                <label for="remember-me">Remember me</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <button type="submit" class="btn waves-effect waves-light col s12">Submit
+                                <i class="material-icons">check_circle</i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col s3"></div>
+        </div>
+    </div>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</body>
+
+</html>
