@@ -3,7 +3,7 @@ var passport = require('passport'),
     user = { // This a hard-coded user
         _id: 1,
         username: 'admin',
-        email: 'admin@gmail.com',
+        email: 'john@doe.com',
         password: 'password'
     };
 

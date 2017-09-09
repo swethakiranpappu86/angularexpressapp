@@ -2,13 +2,14 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/materialize.min.css">
+    <script src="static/js/angular.min.js"></script>
+    <script src="static/js/appController.js"></script>
+    <link href="static/css/icon.css" rel="stylesheet">
     <script src="static/export.js"></script>
 </head>
 
-<body ng-app="practichemApp">
+<body ng-app="myModule">
     <div class="container" ng-controller="MainCtrl">
         <div class="row">
             <!-- <div class="col s2"></div> -->
@@ -16,7 +17,7 @@
                 <div class="col s12 z-depth-4 card-panel">
                     <form class="col s12" name="practichemForm" ng-submit="submitForm(practichemForm.$valid)" novalidate="">
                         <div class="col s12 m6">
-                            <h4 class="header">User Registration Details</h4>
+                            <h5 class="header center">User Registration Details</h5>
                             <div class="card horizontal">
                                 <div class="card-stacked">
                                     <div class="card-content">
@@ -46,7 +47,7 @@
                         <div class="col s12 m6">
                             <div class="row">
                                 <div class="col s12 m12">
-                                    <h4 class="header">User Added Details</h4>
+                                    <h5 class="header center">User Added Details</h5>
                                     <div class="card-panel teal" ng-show="IsHidden" style="height:360px;overflow:auto;">
                                         <textarea id="inputTextToSave" cols="80" rows="25" style="display:none">
                                                 {{formattedString}}
@@ -66,53 +67,22 @@
                                         <i class=" material-icons right ">cloud_download</i>
                                         </button>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </form>
+                    <p class="card-action right">
+                        <a class="waves-effect waves-light btn" href="/logout"><i class="material-icons right">assignment_return</i>Logout</a>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // Code goes here
-        var app = angular.module('practichemApp', []);
-
-        app.controller('MainCtrl', function($scope) {
-            $scope.userArray = [];
-
-            //$scope.formData = {};
-            $scope.IsHidden = false;
-            //console.log($scope.userArray);
-            $scope.submitForm = function(isValid) {
-
-                if (isValid) {
-                    $scope.userArray.push('Name' + ":" + $scope.formData.username, 'Address' + ":" + $scope.formData.address);
-                }
-                $scope.IsHidden = $scope.IsHidden ? true : true;
-                // console.log($scope.userArray);
-                $scope.formData.username = '';
-                $scope.formData.address = '';
-                $scope.formattedString = $scope.userArray.toString()
-                    // .replace(",", '</br>') //remove the commas
-                    .replace("[", "") //remove the right bracket
-                    .replace("]", "")
-                    //remove the left bracket
-                    .trim();
-                // console.log($scope.userArray);
-            };
-            // $scope.getData = function() {
-            //     alert($scope.userArray)
-            // }
-
-        });
-    </script>
     <!--Import jQuery before materialize.js-->
-    <script type="text/javascript " src="https://code.jquery.com/jquery-3.2.1.min.js "></script>
+    <script type="text/javascript" src="static/js/jquery-3.2.1.min.js"></script>
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js "></script>
-
+    <script src="static/js/materialize.min.js"></script>
 </body>
 
 </html>

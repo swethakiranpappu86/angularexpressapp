@@ -25,66 +25,64 @@ app.use(auth.session());
 
 app.use(flash());
 
-// Set up routes
-// app.get('/', function(req, res) {
-//     // if (req.user) {
-//     //     res.send(
-//     //         '<p>You\'re logged in as <strong>' + req.user.username + '</strong>.</p>' +
-//     //         '<p><a href="/logout">Log out</a></p>'
-//     //     );
-//     // } else {
-//     res.send('<p><a href="index.html">Login</a></p>');
-//     // }
-// });
-
 app.get('/static/export.js', function(req, res) {
     res.sendFile(path.join(__dirname + '/static/export.js'));
 });
 
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + "/" + "index.html");
+app.get('/static/css/materialize.min.css', function(req, res) {
+    res.sendFile(path.join(__dirname + '/static/css/materialize.min.css'));
 });
-//app.get('/index.html', function(req, res) {
-// res.send(
-//     '<form action="/login" method="POST">' +
-//     '<h2>Login</h2>' +
-//     '<p><input name="username"></p>' +
-//     '<p><input name="password"></p>' +
-//     '<p><input type="submit" value="Login"></p>' +
-//     '<p style="color: red;">' + req.flash('error') + '</p>' +
-//     '</form>'
 
-// );
-//});
+app.get('/static/css/icon.css', function(req, res) {
+    res.sendFile(path.join(__dirname + '/static/css/icon.css'));
+});
+
+app.get('/static/js/materialize.min.js', function(req, res) {
+    res.sendFile(path.join(__dirname + '/static/js/materialize.min.js'));
+});
+
+app.get('/static/js/jquery-3.2.1.min.js', function(req, res) {
+    res.sendFile(path.join(__dirname + '/static/js/jquery-3.2.1.min.js'));
+});
+
+app.get('/static/js/angular.min.js', function(req, res) {
+    res.sendFile(path.join(__dirname + '/static/js/angular.min.js'));
+});
+
+app.get('/static/js/appController.js', function(req, res) {
+    res.sendFile(path.join(__dirname + '/static/js/appController.js'));
+});
+
+// Set up routes
+app.get('/', function(req, res) {
+    if (req.user) {
+        res.sendfile('dashboard.html', req.user.email);
+        // console.log(req.user.email);
+    } else {
+        res.sendfile('login.html');
+    }
+});
+
+app.get('/login', function(req, res) {
+    res.sendFile(__dirname + "/" + "login.html");
+});
 
 app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
 
-app.post('/dashboard', function(req, res) {
-    //console.log(req.body.username);
-    //res.send("done");
-    res.sendFile(__dirname + "/" + "dashboard.html");
-    // res.send('Username is ' + req.body.email + '<br>Password is ' + req.body.password);
-    // console.log(req.body);
-});
+app.post('/login',
+    auth.authenticate('login', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
+    })
 
-// app.get('/dashboard', function(req, res) {
-//     res.render('dashboard', { Email: req.body.email });
-//     console.log(req.body.email)
-// });
+);
 
-// app.post('/login',
-//     auth.authenticate('login', {
-//         successRedirect: '/',
-//         failureRedirect: '/login',
-//         failureFlash: true
-//     })
-// );
-
-var server = app.listen(8000, function() {
+var server = app.listen(3000, function() {
     var port = server.address().port;
 
-    console.log('Server running on http://127.0.0.1:%s', port);
+    console.log('Server running on :', port);
 });
